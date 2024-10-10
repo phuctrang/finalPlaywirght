@@ -63,7 +63,7 @@ test.describe('Sauce Demo Tests', () => {
 
   test('8. should display the correct order of item when filter is set to "Price (low to high)"', async ({ page }) => {
     await loginPage.login('standard_user', 'secret_sauce');
-    await inventoryPage.sortBy('Price (low to high)');
+    await inventoryPage.sortBy('lohi');
     const prices = await inventoryPage.getItemPrices();
     expect(prices).toEqual(prices.slice().sort((a, b) => a - b));
   });

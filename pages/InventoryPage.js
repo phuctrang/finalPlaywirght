@@ -4,7 +4,7 @@ class InventoryPage {
     this.inventoryItems = page.locator('.inventory_item');
     this.cartBadge = page.locator('.shopping_cart_badge');
     this.cartLink = page.locator('.shopping_cart_link');
-    this.sortDropdown = page.locator('[data-test="product_sort_container"]');
+    this.sortDropdown = page.locator('[data-test="product-sort-container"]');
   }
 
   async getInventoryItemCount() {
@@ -21,13 +21,12 @@ class InventoryPage {
   }
 
   async sortBy(option) {
-    await this.page.waitForSelector('[data-test="product_sort_container"]', { state: 'visible' });
-    await this.sortDropdown.selectOption({ label: option });
+    await this.page.waitForSelector('[data-test="product-sort-container"]', { state: 'visible' });
+    await this.sortDropdown.selectOption({ value: option });
     await this.page.waitForLoadState('networkidle');
   }
 
   async getItemPrices() {
-    await delay(3000);
     await this.page.waitForSelector('.inventory_item_price', { state: 'visible' });
     const priceElements = await this.page.$$('.inventory_item_price');
     return await Promise.all(priceElements.map(async (el) => {
